@@ -120,7 +120,10 @@
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" x-data="mediaGrid()">
         <template x-for="(item, idx) in items" :key="idx">
           <article class="relative rounded-2xl overflow-hidden bg-surface border" style="border-color:var(--glass-border);">
-            <img :src="item.image" alt="Post image" class="w-full h-60 object-cover" loading="lazy" onerror="this.onerror=null;this.src='https://via.placeholder.com/800x600/18181C/FFFFFF?text=Ignitor+Fitness'" />
+            <picture>
+              <source :srcset="item.imageMobile" media="(max-width:640px)">
+              <img :src="item.image" :srcset="item.image + ' 1200w, ' + item.imageMobile + ' 640w'" sizes="(max-width:640px) 100vw, 33vw" alt="Post image" class="w-full h-60 object-cover" loading="lazy" decoding="async" fetchpriority="low" onerror="this.onerror=null;this.src='https://via.placeholder.com/800x600/18181C/FFFFFF?text=Ignitor+Fitness'" />
+            </picture>
               <div class="absolute inset-0 flex flex-col justify-between p-3">
                 <div class="flex justify-end">
                   <div class="bg-black/40 px-2 py-1 rounded-full text-xs text-slate-200">❤ 1.2k</div>
@@ -139,7 +142,7 @@
       </div>
 
       <div class="mt-6 px-4 py-3 rounded-xl bg-[rgba(255,255,255,0.02)] border" style="border-color:var(--glass-border);">
-        Want more daily workout motivation? See live transformations on Instagram @ignitorfitness — <a href="https://www.instagram.com/ignitorfitness/" target="_blank" class="text-accent-cyan font-bold">Follow</a>
+        Want more daily workout motivation? See live transformations on Instagram <a href="https://www.instagram.com/ignitorfitness/" target="_blank" rel="noreferrer" class="text-accent-cyan font-bold">@ignitorfitness</a> — <a href="https://www.instagram.com/ignitorfitness/" target="_blank" rel="noreferrer" class="text-accent-cyan font-bold">Follow</a>
       </div>
     </section>
 
@@ -258,12 +261,12 @@
     function mediaGrid(){
       return {
         items: [
-          { image: 'https://images.unsplash.com/photo-1605296867304-46d5465a13f1?q=80&w=1200&auto=format&fit=crop', caption: 'Heavy Compound Strength & PR Days #IgnitorFit' },
-          { image: 'https://images.unsplash.com/photo-1558611848-73f7eb4001d4?q=80&w=1200&auto=format&fit=crop', caption: 'Form Correction & 1-on-1 Trainer Supervision' },
-          { image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200&auto=format&fit=crop', caption: 'High-Octane Cardio & Endurance Row' },
-          { image: 'https://images.unsplash.com/photo-1518609878373-06d740f60d8b?q=80&w=1200&auto=format&fit=crop', caption: 'Community Functional Training & Group Energy' },
-          { image: 'https://images.unsplash.com/photo-1514512364185-7f4e5f0a8a3d?q=80&w=1200&auto=format&fit=crop', caption: 'Trainer-led Mobility & Recovery Sessions' },
-          { image: 'https://images.unsplash.com/photo-1518606925193-2f3c3b5b4b1d?q=80&w=1200&auto=format&fit=crop', caption: 'Athlete-focused Strength Programming' }
+          { image: 'https://images.unsplash.com/photo-1605296867304-46d5465a13f1?q=80&w=1200&auto=format&fit=crop', imageMobile: 'https://images.unsplash.com/photo-1605296867304-46d5465a13f1?q=80&w=640&auto=format&fit=crop', caption: 'Heavy Compound Strength & PR Days #IgnitorFit' },
+          { image: 'https://images.unsplash.com/photo-1558611848-73f7eb4001d4?q=80&w=1200&auto=format&fit=crop', imageMobile: 'https://images.unsplash.com/photo-1558611848-73f7eb4001d4?q=80&w=640&auto=format&fit=crop', caption: 'Form Correction & 1-on-1 Trainer Supervision' },
+          { image: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1200&auto=format&fit=crop', imageMobile: 'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=640&auto=format&fit=crop', caption: 'High-Octane Cardio & Endurance Row' },
+          { image: 'https://images.unsplash.com/photo-1518609878373-06d740f60d8b?q=80&w=1200&auto=format&fit=crop', imageMobile: 'https://images.unsplash.com/photo-1518609878373-06d740f60d8b?q=80&w=640&auto=format&fit=crop', caption: 'Community Functional Training & Group Energy' },
+          { image: 'https://images.unsplash.com/photo-1514512364185-7f4e5f0a8a3d?q=80&w=1200&auto=format&fit=crop', imageMobile: 'https://images.unsplash.com/photo-1514512364185-7f4e5f0a8a3d?q=80&w=640&auto=format&fit=crop', caption: 'Trainer-led Mobility & Recovery Sessions' },
+          { image: 'https://images.unsplash.com/photo-1518606925193-2f3c3b5b4b1d?q=80&w=1200&auto=format&fit=crop', imageMobile: 'https://images.unsplash.com/photo-1518606925193-2f3c3b5b4b1d?q=80&w=640&auto=format&fit=crop', caption: 'Athlete-focused Strength Programming' }
         ],
         playSample(item){
           alert('Play sample video for: ' + item.caption);
@@ -288,7 +291,7 @@
           { q: 'Where exactly is Ignitor Fitness located?', a: 'Near Railkar Road, Sambhaji Nagar, Kadamwak Wasti, Loni Kalbhor, Maharashtra 412201.' },
           { q: 'What are the gym timings?', a: 'Monday to Saturday: 5:00 AM – 10:00 PM | Sunday: 7:00 AM – 12:00 PM.' },
           { q: 'Is it beginner-friendly?', a: 'Absolutely. Our floor trainers provide detailed attention and direct supervision to ensure safety and progress from your very first workout.' },
-          { q: 'How can I check daily workout videos and member results?', a: 'Follow our official Instagram page @ignitorfitness (https://www.instagram.com/ignitorfitness/) for daily reel updates, trainer tips, and member transformations.' }
+          { q: 'How can I check daily workout videos and member results?', a: 'Follow our official Instagram page <a href="https://www.instagram.com/ignitorfitness/" target="_blank" rel="noreferrer" class="text-accent-cyan font-bold">@ignitorfitness</a> for daily reel updates, trainer tips, and member transformations.' }
         ],
         init(){
           this.open = this.items.map(()=>false);
