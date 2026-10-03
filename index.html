@@ -27,21 +27,7 @@
       }
     }
   </script>
-  <script>
-    // Ensure the logo is visible even if the image is missing
-    document.addEventListener('DOMContentLoaded', function(){
-      const logoImg = document.querySelector('header img');
-      if(logoImg){
-        logoImg.addEventListener('error', function(){
-          const parent = logoImg.parentElement;
-          const svg = document.createElement('div');
-          svg.innerHTML = `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#FF5500"/><text x="50%" y="54%" text-anchor="middle" fill="#fff" font-size="10" font-family="Inter, Arial" font-weight="700">IF</text></svg>`;
-          svg.className = 'inline-block';
-          parent.replaceChild(svg, logoImg);
-        });
-      }
-    });
-  </script>
+  <!-- logo fallback removed (we use inline image onerror fallback instead) -->
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
   <!-- Lucide Icons -->
@@ -61,8 +47,8 @@
     <div class="backdrop-blur-lg bg-[rgba(11,11,12,0.72)] border-b" style="border-color: rgba(255,255,255,0.08);">
       <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           <a href="#" class="flex items-center gap-3">
-          <span class="inline-flex items-center justify-center p-1 rounded-md bg-[rgba(255,255,255,0.02)]">
-            <img src="assets/logo.png" alt="Ignitor Fitness" class="w-12 h-12 object-contain" />
+          <span class="inline-flex items-center justify-center p-1 rounded-md bg-[rgba(255,255,255,0.02)]" style="backdrop-filter: blur(6px);">
+            <img src="assets/logo.png" alt="Ignitor Fitness" class="w-14 h-14 object-contain border border-white/10 p-1 rounded-md shadow" onerror="this.onerror=null;this.src='https://via.placeholder.com/56x56/FF5500/FFFFFF?text=IF'" />
           </span>
           <div class="leading-tight ml-2">
             <div class="text-2xl font-extrabold tracking-wider uppercase">IGNITOR <span class="text-accent-logo">.</span></div>
@@ -92,7 +78,7 @@
         <div class="absolute inset-0 bg-gradient-to-r from-[#0B0B0C]/60 via-[#0B0B0C]/40 to-transparent"></div>
       </div>
 
-      <div class="relative max-w-6xl mx-auto px-6 py-28 flex flex-col gap-6 z-10">
+      <div class="relative max-w-6xl mx-auto px-6 py-28 flex flex-col gap-6 z-10 items-center text-center">
         <div class="flex items-center gap-4">
           <div class="p-3 rounded-xl bg-surface/60 backdrop-blur-md border" style="border-color:var(--glass-border);">
             <div class="flex items-center gap-3">
@@ -110,9 +96,9 @@
         </div>
 
         <h2 class="text-3xl md:text-5xl font-extrabold uppercase tracking-wide leading-tight">IGNITOR FITNESS: LONI KALBHOR’S LARGEST FITNESS HUB</h2>
-        <p class="text-base md:text-lg text-slate-300 max-w-2xl">Premium equipment. Elite trainer guidance. No shortcuts. Your cult starts here.</p>
+        <p class="text-base md:text-lg text-slate-300 max-w-3xl">Premium equipment. Elite trainer guidance. No shortcuts. Your cult starts here.</p>
 
-        <div class="flex items-center gap-4 mt-4">
+        <div class="flex items-center gap-4 mt-4 justify-center">
           <a href="https://wa.me/919897075136?text=Hi,%20I%27m%20interested%20in%20a%20free%20trial%20session%20at%20Ignitor%20Fitness.%20Please%20help%20me%20book." target="_blank" rel="noreferrer" class="inline-flex items-center gap-3 px-6 py-3 rounded-2xl bg-accent-logo text-black font-bold shadow-neon-logo transform hover:scale-[1.02] transition-transform">Book a Free Trial Session</a>
           <a href="https://www.instagram.com/ignitorfitness/" target="_blank" rel="noreferrer" class="inline-flex items-center gap-2 px-4 py-3 rounded-2xl border border-white/8 text-sm text-slate-100">Follow @ignitorfitness</a>
         </div>
