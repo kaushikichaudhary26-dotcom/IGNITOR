@@ -27,6 +27,21 @@
       }
     }
   </script>
+  <script>
+    // Ensure the logo is visible even if the image is missing
+    document.addEventListener('DOMContentLoaded', function(){
+      const logoImg = document.querySelector('header img');
+      if(logoImg){
+        logoImg.addEventListener('error', function(){
+          const parent = logoImg.parentElement;
+          const svg = document.createElement('div');
+          svg.innerHTML = `<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="24" height="24" rx="4" fill="#FF5500"/><text x="50%" y="54%" text-anchor="middle" fill="#fff" font-size="10" font-family="Inter, Arial" font-weight="700">IF</text></svg>`;
+          svg.className = 'inline-block';
+          parent.replaceChild(svg, logoImg);
+        });
+      }
+    });
+  </script>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700;800&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
   <!-- Lucide Icons -->
@@ -36,6 +51,7 @@
   <style>
     :root{--glass-border: rgba(255,255,255,0.08)}
     body{font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial}
+    [x-cloak]{display:none}
   </style>
 </head>
 <body class="bg-bg-main text-white antialiased">
@@ -160,14 +176,14 @@
     <!-- FAQ -->
     <section id="faq" class="max-w-4xl mx-auto px-6 py-12">
       <h3 class="text-2xl font-bold uppercase tracking-wider mb-6">Frequently Asked</h3>
-      <div x-data="faqAccordion()">
+      <div x-data="faqAccordion()" x-init="init()" x-cloak>
         <div class="mb-4">
           <input type="search" x-model="query" placeholder="Search FAQs..." class="w-full px-4 py-3 rounded-xl bg-[rgba(255,255,255,0.02)] border" style="border-color:var(--glass-border);">
         </div>
         <template x-for="(item, idx) in filtered" :key="idx">
           <div class="mb-3 rounded-xl overflow-hidden border bg-surface" style="border-color:var(--glass-border);">
             <button @click="toggle(idx)" class="w-full text-left px-4 py-3 flex items-center justify-between">
-              <span class="font-semibold">{{ item.q }}</span>
+              <span class="font-semibold" x-text="item.q"></span>
               <svg x-show="!open[idx]" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
               <svg x-show="open[idx]" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"/></svg>
             </button>
